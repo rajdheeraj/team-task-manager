@@ -1,18 +1,16 @@
 import axios from "axios";
 
-const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || "http://localhost:3000/api",
+const axiosInstance = axios.create({
+  baseURL: import.meta.env.VITE_API_BASE_URL || "https://team-task-manager-production-08a2.up.railway.app/api",
 });
-const api = axios.create({
-  baseURL: "https://your-railway-backend-url",
-});
-api.interceptors.request.use((config) => {
+
+axiosInstance.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
-  if (token) config.headers.Authorization = `Bearer ${token}`;
+  if (token) config.headers.Authorization = Bearer ${token};
   return config;
 });
 
-api.interceptors.response.use(
+axiosInstance.interceptors.response.use(
   (res) => res,
   (err) => {
     if (err.response?.status === 401) {
@@ -24,4 +22,4 @@ api.interceptors.response.use(
   }
 );
 
-export default api;
+export default axiosInstance;
