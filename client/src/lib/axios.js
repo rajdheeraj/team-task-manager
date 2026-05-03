@@ -1,4 +1,4 @@
-import axios from "axios";
+﻿import axios from "axios";
 
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL || "https://team-task-manager-production-08a2.up.railway.app/api",
@@ -6,7 +6,7 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
-  if (token) config.headers.Authorization = Bearer ${token};
+  if (token) config.headers.Authorization = `Bearer ${token}`;
   return config;
 });
 
