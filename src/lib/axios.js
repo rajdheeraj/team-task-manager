@@ -1,12 +1,12 @@
 import axios from "axios";
 
-const api = axios.create({
+const axiosInstance = axios.create({
   baseURL:
     import.meta.env.VITE_API_BASE_URL ||
     "https://team-task-manager-production-08a2.up.railway.app/api",
 });
 
-api.interceptors.request.use((config) => {
+axiosInstance.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
 
   if (token) {
@@ -16,7 +16,7 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-api.interceptors.response.use(
+axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
@@ -29,4 +29,4 @@ api.interceptors.response.use(
   }
 );
 
-export default api;
+export default axiosInstance;
